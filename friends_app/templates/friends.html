@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Friends</title>
+    {% load static %}
+    <link rel="stylesheet" href="{% static 'style.css' %}">
+</head>
+<body>
+    <div class="wrap">
+        <div class="header">
+            <h1 class="welcome" >Welcome {{request.session.user_name}}!</h1>
+            <a href="/logout" style="margin-left: 20px;">Logout</a>
+            <p>{{ all_users.count }}</p>
+        </div>
+        <div class="friends">
+            <h3>Here is the list of your friends:</h3>
+                <table class="table table-sm">
+                    <thead>
+                        <th>Alias</th>
+                        <th>Action</th>
+                    </thead>
+                    <tbody class="small">
+                        {% for user in all_users %}
+                        <tr>
+                            <td> {{ user.first_name }}</td>
+                            <td>
+                                <a href="/profile">Profile</a>
+                                <a href="/delete">Delete</a>
+                            </td>
+                        </tr>
+                        {% endfor %}
+                    </tbody>
+                </table>
+            <form action="/add">
+                <h3>Here is the list of your friends:</h3>
+                <table class="table table-sm">
+                    <thead>
+                        <th>Alias</th>
+                        <th>Action</th>
+                    </thead>
+                    <tbody class="small">
+                        {% for user in all_users %}
+                        <tr>
+                            <td> {{ user.first_name }}</td>
+                            <td>
+                                <input type="submit" value="Add Friend">
+                            </td>
+                        </tr>
+                        {% endfor %}
+                    </tbody>
+                </table>
+            </form>
+        </div>
+    </div>
+</body>
+</html>

@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Log and Reg</title>
+</head>
+<body>
+    <!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Log and Reg</title>
+    {% load static %}
+    <link rel="stylesheet" href="{% static 'style.css' %}">
+</head>
+
+<body>
+    <div id='wrap'>
+        {% if messages %}
+            <div id='errors'>
+                {% for message in messages %}
+                    <p>- {{message}} -</p>
+                {% endfor %}
+            </div>
+        {% endif %}
+
+        <div class='form-box'>
+            <h1>Register:</h1>
+            <form action="/create_user" method=POST>
+                {% csrf_token %}
+                Name: <input type="text" name='f_n'>
+                Alias: <input type="text" name='l_n'>
+                Email: <input type="text" name='email'>
+                Password: <input type="password" name='pw'>
+                Confirm PW: <input type="password" name='conf_pw'>
+                Birthday: <input type="date" name='bh'>
+                <input type="submit" value='Create User'>
+            </form>
+        </div>
+
+        <div class='form-box'>
+            <h1>Login:</h1>
+            <form action="/log_in" method=POST>
+                {% csrf_token %}
+                Email: <input type="text" name='email'>
+                Password: <input type="password" name='pw'>
+                <input type="submit" value='Login'>
+            </form>
+        </div>
+
+    </div>
+</body>
+</html>
